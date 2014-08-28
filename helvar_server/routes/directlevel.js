@@ -1,9 +1,12 @@
 var sock=undefined;
+var dummy_diff=0;
 
 function raw(addr, value, fade) {
-	if (fade == undefined) {
-		fade = 10;
-	}
+    if (fade == undefined) {
+	fade = 10;
+    }
+    fade += dummy_diff;
+    dummy_diff = (dummy_diff +1) &0xf;
     var cmd = ">V:1,C:14,F:"+fade+",L:"+value+",@1.1.1."+addr +"#";
 
     if (!sock) {init();}
@@ -13,9 +16,9 @@ function raw(addr, value, fade) {
 
 function rgb(lightno, rgb, fade) {
 	if (typeof(rgb) == 'string') {
-		r = parseInt(rgb.substr(1,2),16)*100/256;
-		g = parseInt(rgb.substr(3,2),16)*100/256;
-		b = parseInt(rgb.substr(5,2),16)*100/256;
+	    r = Math.floor(parseInt(rgb.substr(1,2),16)*100/256);
+	    g = Math.floor(parseInt(rgb.substr(3,2),16)*100/256);
+	    b = Math.floor(parseInt(rgb.substr(5,2),16)*100/256);
 	} else {
 		r = rgb[0];
 		g = rgb[1];
@@ -37,8 +40,8 @@ function init() {
 
     console.log("initialized");
 
-    //sock.connect(50000, "10.254.1.1", function() {
-    sock.connect(50000, "localhost", function() {
+    sock.connect(50000, "10.254.1.1", function() {
+//    sock.connect(50000, "localhost", function() {
     });
     sock.on('data', function(data) {
         console.log("data----" + data);
@@ -47,7 +50,8 @@ function init() {
         console.log("----" + data);
     });
     sock.on('close', function(data) {
-        console.log("closed" + data);
+        console.log("closed...reopen" + data);
+	init();
     });
     sock.on('error', function(data) {
         console.log("error" + data);
