@@ -2,40 +2,40 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var xmlBodyParser= require('./multipart-xml-bodyparser');
-
 var routes = require('./routes/index');
 
 var app = express();
 
 settings = require("./readsettings");
 settings.MACDICT = {
-	"10:aa:bb:ff:85:bb": 0,
+	"f8:a9:d0:4e:fd:d7": 0,
 	"10:aa:bb:ff:85:cc": 1,
 	"10:aa:bb:ff:85:dd": 2,
-	"dummy": 3,
-	"dummy": 4,
-	"dummy": 5,
-	"dummy": 6,
-	"dummy": 7,
+	"dummy1": 3,
+	"dummy2": 4,
+	"dummy3": 5,
+	"dummy4": 6,
+	"dummy5": 7,
 };
-settings.IPDICT = [];
+settings.IPDICT = {};
 settings.selected = [];
 settings.colors = [
-	[93, 19, 19],
-	[93, 19, 19],
-	[93, 19, 19],
-	[93, 19, 19],
-	[93, 19, 19],
-	[93, 19, 19],
-	[93, 19, 19],
-	[93, 19, 19]
+    "#f03030",
+    "#f03030",
+    "#f03030",
+    "#f03030",
+    "#f03030",
+    "#f03030",
+    "#f03030",
+    "#f03030",
 	];
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(bodyParser.json());
+app.use(bodyParser());
+//app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(xmlBodyParser());
