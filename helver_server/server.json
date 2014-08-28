@@ -1,0 +1,80 @@
+{
+	"server": "localhost"
+,	"default_color": "#f0f0f0"
+,	"ecoselector_colors": [
+		"#f03030",
+		"#f04050",
+		"#c05050",
+		"#a08080",
+		"#8090a0",
+		"#75c0c0",
+		"#60e0c0",
+		"#40f0f0"
+	]
+,	"scene_colors": {
+		"scene1": [
+			"#1040ff", "#0e38ee", "#0c30dd", "#0a28cc", 
+			"#2040ff", "#1e38ee", "#1c30dd", "#1a28cc" 
+		]
+,		"scene2": [
+			"#2040ff", "#1e38ee", "#1c30dd", "#1a28cc",
+			"#1040ff", "#0e38ee", "#0c30dd", "#0a28cc" 
+		]
+,		"scene3": [
+			"#ff4010", "#ee380e", "#dd300c", "#cc280a",
+			"#ff4020", "#ee381e", "#dd301c", "#cc281a" 
+		]
+,		"scene4": [
+			"#ff4020", "#ee381e", "#dd301c", "#cc281a", 
+			"#ff4010", "#ee380e", "#dd300c", "#cc280a" 
+		]
+,		"scene5": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene6": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene7": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene8": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene9": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene10": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene11": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene12": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene13": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene14": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene15": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+,		"scene16": [
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
+			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+		]
+	}
+}

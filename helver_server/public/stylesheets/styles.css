@@ -1,0 +1,89 @@
+@font-face {
+	font-family: 'cherl';
+	src: url('./cherl.ttf') format('truetype');
+}
+body {
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #eaeafa;
+    background-image: url("leaf.jpg");
+}
+.button_group {
+	float: right;
+}
+.color_sample {
+	width: 90px;
+	height: 45px;
+}
+.header {
+	color: #49e;
+    font-family: "cherl";
+	font-size: 28px;
+}
+.inner {
+	color: #374;
+    font-family: "cherl";
+	font-size: 22px;
+}
+.left {
+	text-align:left;
+	float:left;
+}
+.right {
+	text-align:right;
+	float:right;
+}
+.footer {
+	color: #24f;
+    font-family: "cherl";
+	font-size: 18px;
+	text-align:right;
+}
+.switch {
+	width: 20px;
+	height: 145px;
+	border-radius: 3px;
+	display: inline-block;
+	margin: 5px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.barbtn {
+	width: 20px; height: 140px;
+	border-radius: 3px;
+	display: inline-block;
+	margin-right: 8px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+.selected	{
+	box-shadow: 0px 0px 20px 6px rgba(030,41,250,1.0);
+}
+#bar1 {
+	background: -webkit-gradient(linear, left top, right bottom, from(#f03030), to(#a01020));
+}
+#bar2 {
+	background: -webkit-gradient(linear, left top, right bottom, from(#f04050), to(#c090a0));
+}
+#bar3 {
+	background: -webkit-gradient(linear, left top, right bottom, from(#c05050), to(#c010c0));
+}
+#bar4 {
+	background: -webkit-gradient(linear, left top, right bottom, from(#a08080), to(#a010d0));
+}
+#bar5 {
+	background: -webkit-gradient(linear, left top, right bottom, from(#8090a0), to(#8010d0));
+}
+#bar6 {
+	background: -webkit-gradient(linear, left top, right bottom, from(#75c0c0), to(#6060d0));
+}
+#bar7 {
+	background: -webkit-gradient(linear, left top, right bottom, from(#60e0c0), to(#5070d0));
+}
+#bar8 {
+	background: -webkit-gradient(linear, left top, right bottom, from(#40f0f0), to(#30a0d0));
+}
+
+#picker {
+	width:194px;
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+	float: left;
+}
