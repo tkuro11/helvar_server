@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Virtual Monitor</title>
+		<script src="./public/jquery.min.js"></script>
+		<style>
+			table {
+			}
+			table td {
+				width: 50px;
+				height:50px;
+				text-align: center;
+				border: solid;
+			}
+		</style>
+	</head>
+	<h1>Virtual Light Monitor</h1>
+	<body>
+		<table>
+			<tr>
+				<td id="light1"> 1 </td>
+				<td id="light2"> 2 </td>
+				<td id="light3"> 3 </td>
+				<td id="light4"> 4 </td>
+			</tr>
+			<tr>
+				<td id="light5"> 5 </td>
+				<td id="light6"> 6 </td>
+				<td id="light7"> 7 </td>
+				<td id="light8"> 8 </td>
+			</tr>
+		</table>
+		<div class="ind">---</div>
+		<script> 
+			function conv(a) { var s = "0"+a.toString(16); return s.substr(s.length-2, 2); }
+			setInterval(function() {
+					$.ajax({
+						url: "check",
+						cache: false, 
+						success: function (data) {
+							$(".ind").html(data);
+							d = data.split(",");
+							for (var i= 1; i<9; i++) {
+								var r = Math.floor(Number(d.shift())*255/100),
+								    g = Math.floor(Number(d.shift())*255/100),
+									b = Math.floor(Number(d.shift())*255/100);
+								var rgb = "#"+conv(r)+conv(g)+conv(b);
+								$("#light"+i).css("background",rgb);
+							}
+						}
+					});
+				}, 1000);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,9 @@
+{
+	"name": "lightingServer",
+	"version": "0.0.1",
+	"private": "true",
+	"dependencies": {
+		"xml2js": "~0.4.4",
+		"express": "~4.8.0"
+	}
+}
