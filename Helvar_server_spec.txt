@@ -1,0 +1,100 @@
+プロダクトは以下の２つのプロセスからなる
+
+1. 仮想照明プロセス
+2. サーバプロセス
+
+仮想照明プロセス
+--------------
+仮想照明プロセスは　DALI により制御される Helvar ルータを模倣しており、
+Helvarコマンドを受け取り内部状況を変化させる。 デバッグ用。
+
+URL /　へのアクセスで点灯状態の表示を行う。
+このプロセスは 50000番 TCPと 3000番 HTTPを開いている。
+50000番は
+     Helvar Direct Level のみをサポート
+     (>V:1,C:14,L:80,@1.1.1.*#) * すぐしらべる *
+3000番は  / で table view
+         /monitorで #f0f0f0,#ff1010...
+　　　　　　みたいなものを返す。 / でかえした index.htmlでこれを ajaxゲットして style.backgroundに設定
+
+[COMPLETED]
+
+サーバプロセス
+------------
+
+実際にリリースすべきプロセス。
+1. POST
+   ケータイからのXML情報を受け取り、その中の 照明ID に応じて各照明の色を
+   変更するHelvarコマンドを送信する.　
+   ID = Zの場合何もしない
+
+   ID = valid [1-9]の場合、 (debug容易化のため mod 8とする)
+
+   IPDICT:: IPアドレス -> MACアドレス　の辞書。
+   MACDICT:: MACアドレス -> 端末NO　の辞書.
+
+   IPDICT[ip]が未登録の場合, MAC ADDRESS 登録。
+   IPDICT[ip]が登録済みの場合、 MAC ADDRESS から 端末NO ->
+   COLTABLE[NO] -> 色を抽出　これを IDで示される灯具に設定
+
+2. GET /
+   ケータイからのHTTPリクエストに応じて、コントロール画面を表示する。 URL /
+   コントロール画面では色の設定を行う。
+
+  // *修正*
+  // 色設定のデフォルト値はシアンとする。
+  // 色系統 シアン（水）　マゼンダ（華）　イエロー（太陽）　から色を選び、
+  // その強さを 50 - 100の間でスライダ設定する。
+
+ > eco selectorとして、デフォルトの温度色を表示。左右ボタンで
+   選択する仕様とする。
+ > また下部に汎用カラーピッカーを置く。
+ > eco selector とカラーピッカーは連動
+
+      IPDICT[ip] -> MACDICT[MAC] -> COLTABLE[NO]に格納
+
+   スライダはストップするごとに値を サーバに送る。
+   ajax POST
+
+3. GET /control
+   管理用のURLを備える /control
+   a. 普段の色設定
+   b. MAC-NOひも付け設定 MACDICTの登録
+
+4. GET /scene?no=1-16
+   server.jsonで与えた scene_colorを設定する。
+
+5. GET /manual [T.B.D.]
+   手動操作用 URLを備える /manual
+   一度でもここにアクセスすると XML入力は無効化
+   全て手動になる。戻すにはサーバ立ち上げ直し　
+   　未実装
+
+
+Example scenario
+----------------
+サーバ内部情報 :  selected, IPDICT, COLTABLE, alert
+1. サーバ受付開始。
+   XMLは未
+   IPDICT 空
+2. NEXUS起動
+   XMLを送信
+   サーバがIPDICT[IP]= MACaddrを登録
+3. NEXUS 可視光圏内
+   送信XMLデータから MACaddr, lightIDを使用
+   MACaddr -> phone's id 。
+   phone's id の選択lightidを更新
+4. NEXUSから色情報送信
+   IPDICT[ip] -> MACDICT[MAC] -> NO
+   COLTABLE[NO]に送信された色情報を設定.
+   selected[NO] の灯具色を変更
+5. 緊急モード
+   vitalの 心拍数が 0 で緊急モード
+   alert[NO]にtrue設定
+　　赤ー黒点滅
+   1秒周期タイマで state.alertを見て設定
+
+6. 必要？
+　 一定時間誰もいない場合(all ID == Z)
+   ジュリアナまたはKnight 2000モード？
+
