@@ -13,7 +13,7 @@ router.post('/', function(req, res) {
     var MACaddr	= req.body.lvdata['$']['MACaddr'];
     var ID = Number(req.body.lvdata.lightid);
     console.log(MACaddr+ ":"+ ID);
-    settings.IPDICT[ipaddr] = MACaddr;
+    states.IPDICT[ipaddr] = MACaddr;
 
     if (isNaN(ID)) {
 	res.send("NOID");
@@ -26,12 +26,12 @@ router.post('/', function(req, res) {
     // update?
     var termno = settings.MACDICT[MACaddr];
 
-    if (settings.selected[termno] != ID) {
+    if (states.selected[termno] != ID) {
 	// update!
-	var prev = settings.selected[termno];
+	var prev = states.selected[termno];
 	directlevel.rgb(prev, settings.default_color, 100);
-	directlevel.rgb(ID, settings.colors[termno], 100);
-	settings.selected[termno] = ID;
+	directlevel.rgb(ID, states.colors[termno], 100);
+	states.selected[termno] = ID;
     }
 
     res.send("OK");
@@ -45,13 +45,21 @@ router.get('/colors', function(req, res) {
 router.post('/updatecolor', function(req, res) {
     console.log("/updater");
     console.log(req.body.color);
-    var MACaddr = settings.IPDICT[req.client.remoteAddress];
+    var MACaddr = states.IPDICT[req.client.remoteAddress];
     var termno = settings.MACDICT[MACaddr];
-    settings.colors[termno] = req.body.color;
-    directlevel.rgb(settings.selected[termno], req.body.color);
-    console.log("--" + settings.colors + "," + req.client.remoteAddress);
-    console.log(settings.IPDICT);
+    states.colors[termno] = req.body.color;
+    directlevel.rgb(states.selected[termno], req.body.color);
+    console.log("--" + states.colors + "," + req.client.remoteAddress);
+    console.log(states.IPDICT);
     res.send("OK");
+});
+
+router.get('/scene', function (req, res) {
+	console.log("/scene");
+});
+
+router.get('/scene', function (req, res) {
+	console.log("/scene");
 });
 
 module.exports = router;

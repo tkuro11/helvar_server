@@ -7,27 +7,29 @@ var routes = require('./routes/index');
 var app = express();
 
 settings = require("./readsettings");
-settings.MACDICT = {
-	"f8:a9:d0:4e:fd:d7": 0,
-	"10:aa:bb:ff:85:cc": 1,
-	"10:aa:bb:ff:85:dd": 2,
-	"dummy1": 3,
-	"dummy2": 4,
-	"dummy3": 5,
-	"dummy4": 6,
-	"dummy5": 7,
-};
-settings.IPDICT = {};
-settings.selected = [];
-settings.colors = [
-    "#f03030",
-    "#f03030",
-    "#f03030",
-    "#f03030",
-    "#f03030",
-    "#f03030",
-    "#f03030",
-    "#f03030",
+
+states = {} // current state 
+states.IPDICT = {};
+states.selected = [];
+states.alerts = [
+    false,  // term0
+    false,  // term1
+    false,  // term2
+    false,  // term3
+    false,  // term4
+    false,  // term5
+    false,  // term6
+    false  // term7
+	];
+states.colors = [
+    "#f03030",  // term0
+    "#f03030",  // term1
+    "#f03030",  // term2
+    "#f03030",  // term3
+    "#f03030",  // term4
+    "#f03030",  // term5
+    "#f03030",  // term6
+    "#f03030",  // term7
 	];
 
 // view engine setup

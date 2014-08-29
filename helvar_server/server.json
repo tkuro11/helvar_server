@@ -1,6 +1,7 @@
 {
 	"server": "localhost"
 ,	"default_color": "#f0f0f0"
+,   "router_address": "10.254.1.1"
 ,	"ecoselector_colors": [
 		"#f03030",
 		"#f04050",
@@ -11,6 +12,16 @@
 		"#60e0c0",
 		"#40f0f0"
 	]
+,   "MACDICT": {
+		"f8:a9:d0:4e:fd:d7": 0,
+		"10:aa:bb:ff:85:cc": 1,
+		"10:aa:bb:ff:85:dd": 2,
+		"dummy1": 3,
+		"dummy2": 4,
+		"dummy3": 5,
+		"dummy4": 6,
+		"dummy5": 7
+    }
 ,	"scene_colors": {
 		"scene1": [
 			"#1040ff", "#0e38ee", "#0c30dd", "#0a28cc", 
