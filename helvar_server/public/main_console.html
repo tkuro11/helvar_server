@@ -1,96 +1,99 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <title>Example</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0,user-scalable=no"/>
-	<link rel="stylesheet" type="text/css" href="./stylesheets/styles.css" />
-	<script src="javascripts/jquery/jquery-2.0.0.min.js"></script>
-	<script src="javascripts/raphael-min.js"></script>
-	<script src="javascripts/colorwheel.js"></script>
-	<script type="text/javascript">
-	        function conv(a) {var s = "0"+ a.toString(16); return s.substr(s.length-2, 2); }
-	        function darken(c) {
-		   r = parseInt(c.substr(1, 2),16);
-		   g = parseInt(c.substr(3, 2),16);
-		   b = parseInt(c.substr(5, 2),16);
+    <head>
+        <title>Example</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.0,user-scalable=no"/>
+        <link rel="stylesheet" type="text/css" href="./stylesheets/styles.css" />
+        <script src="javascripts/jquery/jquery-2.0.0.min.js"></script>
+        <script src="javascripts/raphael-min.js"></script>
+        <script src="javascripts/colorwheel.js"></script>
+        <script type="text/javascript">
+function conv(a) {var s = "0"+ a.toString(16); return s.substr(s.length-2, 2); }
+function darken(c) {
+    r = parseInt(c.substr(1, 2),16);
+    g = parseInt(c.substr(3, 2),16);
+    b = parseInt(c.substr(5, 2),16);
 
-		   r = conv(Math.floor(r/2));
-		   g = conv(Math.floor(g/2));
-		   b = conv(Math.floor(b/2));
+    r = conv(Math.floor(r/2));
+    g = conv(Math.floor(g/2));
+    b = conv(Math.floor(b/2));
 
-		   return "#"+r+g+b;
-		}
-		var colors;
-		jQuery(function($) {
-		   $.ajax({ 
-		      url: "colors",
-		      cache: false,
-		      success: function(data) {
-		          colors = data.toString().split(",");
-		          for (var i = 0; i< colors.length; i++) {
-				             var d = darken(colors[i]);
-		                             $("#bar"+i).css("background", 
-					     "-webkit-gradient(linear, left top, right bottom, from("+colors[i] + "), to(" + d + "))");
-			}}});
+    return "#"+r+g+b;
+}
+var colors;
+jQuery(function($) {
+    $.ajax({ 
+        url: "colors",
+        cache: false,
+        success: function(data) {
+            colors = data.toString().split(",");
+            for (var i = 0; i< colors.length; i++) {
+                var d = darken(colors[i]);
+                $("#bar"+i).css("background", 
+                   "-webkit-gradient(linear, left top, right bottom, from("+
+                    colors[i] + "), to(" + d + "))");
+            }
+        }
+    });
 
-				cw = Raphael.colorwheel($("#picker")[0],200,140);
-				cw.color('#008000');
-		                au = new Audio("stylesheets/BEEP1011.WAV");
-				cw.ondrag(null, function() {
-					     $.post("updatecolor",
-					     {"color":cw.color().hex},
-					     function(data) {
-					     });
-		                });
-		});
-		var selected = 1;
-		function hlchange(diff) {
-			var prev = selected;
-			selected += diff;
-			if (selected > 8) {selected = 8; return }
-			else if (selected < 1) {selected = 1; return }
-			$("#bar"+prev).removeClass("selected");
-			$("#bar"+selected).addClass("selected");
-			au.play();
-		}
-		function push(target, dir) {
-			hlchange(dir);
-			$(target).css("background", "#93f");
-			setTimeout(function() {
-					$(target).css("background", "none");
-					}, 200);
-                        $.post("updatecolor",
-					    {"color":colors[selected]},
-					    function(data) {
-					    });
-			cw.color(colors[selected]);
-		}
-	</script>
-</head>
-<body>
-	<div class="header">Light Control System</div>
-	<div class="inner">ECO selector</div>
-	<div class="barbtn_group">
-		<div class="switch" onclick="push(this,-1)"> <br><br><br>  &lt;<br><br><br><br><br> </div>
-		<div class="barbtn selected" id="bar1"></div>
-		<div class="barbtn" id="bar2"></div>
-		<div class="barbtn" id="bar3"></div> <div class="barbtn" id="bar4"></div>
-		<div class="barbtn" id="bar5"></div> <div class="barbtn" id="bar6"></div>
-		<div class="barbtn" id="bar7"></div> <div class="barbtn" id="bar8"></div>
-		<div class="switch" onclick="push(this,1)"><br><br><br> &gt;<br><br><br><br><br></div>
-		<div class="inner left">&lt;-hot</div> <div class="inner right">cool-&gt;</div>
-	</div>
+    cw = Raphael.colorwheel($("#picker")[0],200,140);
+    cw.color('#008000');
+    au = new Audio("stylesheets/BEEP1011.WAV");
+    cw.ondrag(null, function() {
+        $.post("updatecolor",
+                {"color":cw.color().hex},
+                function(data) {
+                });
+    });
+});
+var selected = 1;
+function hlchange(diff) {
+    var prev = selected;
+    selected += diff;
+    if (selected > 8) {selected = 8; return }
+    else if (selected < 1) {selected = 1; return }
+    $("#bar"+prev).removeClass("selected");
+    $("#bar"+selected).addClass("selected");
+    au.play();
+}
+function push(target, dir) {
+    hlchange(dir);
+    $(target).css("background", "#93f");
+    setTimeout(function() {
+        $(target).css("background", "none");
+    }, 200);
+    $.post("updatecolor",
+            {"color":colors[selected-1]},
+            function(data) {
+            });
+    cw.color(colors[selected]);
+}
+        </script>
+    </head>
+    <body>
+        <div class="header">Light Control System</div>
+        <div class="inner">ECO selector</div>
+        <div class="barbtn_group">
+            <div class="switch" onclick="push(this,-1)"> <br><br><br>  &lt;<br><br><br><br><br> </div>
+            <div class="barbtn selected" id="bar1"></div>
+            <div class="barbtn" id="bar2"></div>
+            <div class="barbtn" id="bar3"></div> <div class="barbtn" id="bar4"></div>
+            <div class="barbtn" id="bar5"></div> <div class="barbtn" id="bar6"></div>
+            <div class="barbtn" id="bar7"></div> <div class="barbtn" id="bar8"></div>
+            <div class="switch" onclick="push(this,1)"><br><br><br> &gt;<br><br><br><br><br></div>
+            <div class="inner left">&lt;-hot</div> <div class="inner right">cool-&gt;</div>
+        </div>
 
-	<hr>
-	<br><br>
-	<div class="inner">Color MAP</div>
-	<div id="picker" class="colorwheel_large"></div>
-	<div class="button_group">
-		<div id="color_sample" class="color_sample"></div>
-	</div>
-	<br clear="all" />
+        <hr>
+        <br><br>
+        <div class="inner">Color MAP</div>
+        <div id="picker" class="colorwheel_large"></div>
+        <div class="button_group">
+            <div id="color_sample" class="color_sample"></div>
+        </div>
+        <br clear="all" />
 
-	<hr>
-	<div class="footer">Renesas Electronics Corp.</div>
-</body>
+        <hr>
+        <div class="footer">Renesas Electronics Corp.</div>
+    </body>
 </html>
