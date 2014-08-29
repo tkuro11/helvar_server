@@ -1,47 +1,40 @@
+// required libraries
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var xmlBodyParser= require('./multipart-xml-bodyparser');
-var routes = require('./routes/index');
 
-var app = express();
-
+// global settings
 settings = require("./readsettings");
 
-states = {} // current state 
-states.IPDICT = {};
-states.selected = [];
-states.alerts = [
-    false,  // term0
-    false,  // term1
-    false,  // term2
-    false,  // term3
-    false,  // term4
-    false,  // term5
-    false,  // term6
-    false  // term7
-	];
-states.colors = [
-    "#f03030",  // term0
-    "#f03030",  // term1
-    "#f03030",  // term2
-    "#f03030",  // term3
-    "#f03030",  // term4
-    "#f03030",  // term5
-    "#f03030",  // term6
-    "#f03030",  // term7
-	];
+// routes information & express object
+var routes = require('./routes/index');
+var app = express();
+
+// local state informations
+states = {}
+states.IPDICT = {};  // IP addr -> MAC translate cache
+states.selected = []; // termNo -> current location ID
+
+states.alerts = []; // alert information
+states.colors = []; // termNo -> current color setting
+for (var i =0; i< 8; i++) { // initialize above 2
+	states.alerts.push(false);
+	states.colors.push(settings.ecoselector_colors[0]);
+}
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(bodyParser());
-//app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+// body parser settings
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser());
+app.use(bodyParser.urlencoded());
 app.use(xmlBodyParser());
 
+// route assign
 app.use('/', routes);
 
 /// catch 404 and forward to error handler
@@ -74,6 +67,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;

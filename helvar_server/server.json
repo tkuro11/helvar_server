@@ -1,7 +1,6 @@
 {
-	"server": "localhost"
-,	"default_color": "#f0f0f0"
-,   "router_address": "10.254.1.1"
+	"default_color": "#f0f0f0"
+,   "router_address": "localhost"
 ,	"ecoselector_colors": [
 		"#f03030",
 		"#f04050",
@@ -14,7 +13,7 @@
 	]
 ,   "MACDICT": {
 		"f8:a9:d0:4e:fd:d7": 0,
-		"10:aa:bb:ff:85:cc": 1,
+		"f8:a9:d0:4f:00:73": 1,
 		"10:aa:bb:ff:85:dd": 2,
 		"dummy1": 3,
 		"dummy2": 4,
