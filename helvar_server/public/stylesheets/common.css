@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 2px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,17 +7,39 @@ a {
   color: #00B7FF;
 }
 
+.cpadgroup{
+    display: block;
+    height: 12px;
+    float: left;
+}
+.cpad {
+	width:8px;
+	height:8px;
+	margin-left:2px;
+	margin-bottom:0px;
+	margin-bottom:0px;
+	margin-top:0px;
+	padding:0px;
+    background: red;
+    border: 1px solid;
+    float: left;
+}
 .btn {
-	margin-bottom: 5px;
-	width: 130px;    
+	margin-bottom: 20px;
+	margin-right: 4px;
+	margin-left: 4px;
+	width: 100px;    
+	height: 16px;
 	color: white!important;    
-	font-size: 17px;    
+	font-size: 15px;    
 	font-weight:bold;        
 	text-align:center;    
-	display:block;    
+	display: block;    
 	text-decoration:none;    
 	border:1px solid #225588;    
+    float: right;
 	padding: 5px 0 2px 0;    
+    float:left;
 	border-radius:5px;    
 	background:-moz-linear-gradient(rgba(34,85,136,0.5), rgba(34,85,136,1));    
 	background: -webkit-gradient(linear, 100% 0%, 100% 100%, from(rgba(0, 102, 204, 0.5)), to(rgba(0, 112, 245, 1)));    

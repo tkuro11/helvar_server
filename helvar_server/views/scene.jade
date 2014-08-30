@@ -2,30 +2,59 @@ extends layout
 mixin btn(no)
   div
     a.btn(id="marker#{no}", href="scene?no=#{no}") #{no}
-
+    span.cpadgroup
+      div.cpad(id="cpad#{no}1") 
+      div.cpad(id="cpad#{no}2") 
+      div.cpad(id="cpad#{no}3") 
+      div.cpad(id="cpad#{no}4") 
+      br
+      div.cpad(id="cpad#{no}5") 
+      div.cpad(id="cpad#{no}6") 
+      div.cpad(id="cpad#{no}7") 
+      div.cpad(id="cpad#{no}8") 
+      //  br(clear="all")
 block content
-  h1 scene selector
-
+  h1 scene changer
   +btn(1)
   +btn(2)
+  br(clear="all")
   +btn(3)
   +btn(4)
+  br(clear="all")
   +btn(5)
   +btn(6)
+  br(clear="all")
   +btn(7)
   +btn(8)
+  br(clear="all")
   +btn(9)
   +btn(10)
+  br(clear="all")
   +btn(11)
   +btn(12)
+  br(clear="all")
   +btn(13)
   +btn(14)
+  br(clear="all")
   +btn(15)
   +btn(16)
+  br(clear="all")
   hr
   +btn("SCENE OFF")
+  //
 
   script(type="text/javascript").
     var t = document.getElementById("marker#{scene}");
-    t.innerText = "→ "+t.innerText + " ←";
+    if (t) {
+        t.innerText = "→ "+t.innerText + " ←";
+    }
+    var c=!{colors} ;
+    for (var i = 1; i<= 16; i++) {
+      for (var j = 1; j<= 8; j++) {
+         var s = "cpad"+i + j;
+         var k = document.getElementById(s);
+         k.style.background = c["scene"+i][j-1];
+      }
+    }
+
 
