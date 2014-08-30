@@ -26,9 +26,10 @@ router.post('/', function(req, res) {
 	res.send("NOID");
 	return ;
     }
-    console.log(MACaddr+ ":"+ ID);
 
     ID = ((ID-1)%8)+1;
+
+    console.log(MACaddr+ ":"+ ID);
 
     // register IP - MAC assoc
     // update?
@@ -37,7 +38,9 @@ router.post('/', function(req, res) {
     if (states.selected[termno] != ID) {
 	// update!
 	var prev = states.selected[termno];
-	directlevel.rgb(prev, settings.default_color, 100);
+	if (prev != undefined) {
+		directlevel.rgb(prev, states.default_color[prev-1], 100);
+	}
 	directlevel.rgb(ID, states.colors[termno], 100);
 	states.selected[termno] = ID;
     }
@@ -75,13 +78,14 @@ router.get('/scene', function (req, res) {
 		if (1 <= sceneno && sceneno <= 16) {
 			var ctable = settings.scene_colors["scene" +sceneno];
 			for (var i = 0; i< ctable.length; i++) {
-				directlevel.rgb(i+1, ctable[i],100);
+				directlevel.rgb(i+1, ctable[i], 100);
+				states.default_color[i] = ctable[i];
 			}
 			console.log("scene changed ... in scene mode");
 		} else {
 			console.log("deactivate scene mode");
 			for (var i = 0; i< 8; i++) {
-				directlevel.rgb(i+1, settings.default_color,100);
+				directlevel.rgb(i+1, settings.default_color, 100);
 			}
 		}
 	}
