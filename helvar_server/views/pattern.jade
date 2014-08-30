@@ -1,0 +1,17 @@
+extends layout
+mixin btn(no, name)
+  div
+    a.btn(id="marker#{no}", href="pattern?no=#{no}") #{no}.#{name}
+block content
+  h1 pattern changer
+  +btn(1, "K2000")
+  +btn(2, "Juliana")
+  br(clear="all")
+  hr
+  +btn(0, "NO PAT")
+  
+  script(type="text/javascript").
+    var t = document.getElementById("marker#{pattern}");
+    if (t) {
+        t.innerText = "→ "+t.innerText + " ←";
+    }
