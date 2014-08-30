@@ -37,7 +37,7 @@ jQuery(function($) {
     });
 
     cw = Raphael.colorwheel($("#picker")[0],200,140);
-    cw.color('#008000');
+    cw.color('#308030');
     au = new Audio("stylesheets/BEEP1011.WAV");
     cw.ondrag(null, function() {
         $.post("updatecolor",
@@ -72,8 +72,8 @@ function push(target, dir) {
     </head>
     <body>
         <div class="header">Light Control System</div>
-        <div class="inner">ECO selector</div>
         <div class="barbtn_group">
+			<div class="inner">ECO selector</div>
             <div class="switch" onclick="push(this,-1)"> <br><br><br>  &lt;<br><br><br><br><br> </div>
             <div class="barbtn selected" id="bar1"></div>
             <div class="barbtn" id="bar2"></div>
@@ -82,17 +82,14 @@ function push(target, dir) {
             <div class="barbtn" id="bar7"></div> <div class="barbtn" id="bar8"></div>
             <div class="switch" onclick="push(this,1)"><br><br><br> &gt;<br><br><br><br><br></div>
             <div class="inner left">&lt;-hot</div> <div class="inner right">cool-&gt;</div>
-        </div>
-
         <hr>
-        <br><br>
-        <div class="inner">Color MAP</div>
-        <div id="picker" class="colorwheel_large"></div>
-        <div class="button_group">
-            <div id="color_sample" class="color_sample"></div>
+		<br>
+		<br>
         </div>
-        <br clear="all" />
 
+		<div class="inner">Color MAP</div>
+        <div id="picker" class="colorwheel_large"></div>
+        <br clear="all" />
         <hr>
         <div class="footer">Renesas Electronics Corp.</div>
     </body>

@@ -1,3 +1,17 @@
+.portrait {
+	display: none;
+}
+@media only screen and (orientation:landscape) {
+	.barbtn_group {
+	   float:left;
+   	   width:60%;
+    }
+	#picker {
+		margin-left: 10px;
+	}
+
+}
+
 @font-face {
 	font-family: 'cherl';
 	src: url('./cherl.ttf') format('truetype');
