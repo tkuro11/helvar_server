@@ -40,16 +40,15 @@ router.post('/', function(req, res) {
 			if (termno != i && states.selected[i] == ID) {break;}
 		}
 		
+		// update!
+		var prev = states.selected[termno];
+		directlevel.rgb(prev, settings.default_color, 100);
 		if (i == 8) {
-			// update!
-			var prev = states.selected[termno];
-			directlevel.rgb(prev, settings.default_color, 100);
 			directlevel.rgb(ID, states.colors[termno], 100);
-			states.selected[termno] = ID;
 		} else {
 			directlevel.rgb(ID, settings.default_color, 100);
-			states.selected[termno] = ID;
 		}
+		states.selected[termno] = ID;
 	}
 
     res.send("OK");
