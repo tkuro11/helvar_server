@@ -36,13 +36,21 @@ router.post('/', function(req, res) {
 
     if (states.selected[termno] != ID) {
 		var i;
-		for (i = 0; i< 8; i++) {
-			if (termno != i && states.selected[i] == ID) {break;}
-		}
-		
-		// update!
+		var prevflag = false;
 		var prev = states.selected[termno];
-		directlevel.rgb(prev, settings.default_color, 100);
+		for (i = 0; i< 8; i++) {
+			if (termno != i) {
+			    if( states.selected[i] == prev) {
+					directlevel.rgb(states.selected[i], states.colors[i]);
+					prevflag = true;
+				} else if (states.selected[i] == ID) {break;}
+			}
+		}
+
+		// update!
+		if (prevflag == false) {
+			directlevel.rgb(prev, settings.default_color, 100);
+		}
 		if (i == 8) {
 			directlevel.rgb(ID, states.colors[termno], 100);
 		} else {
