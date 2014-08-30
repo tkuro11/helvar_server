@@ -131,7 +131,7 @@ router.get('/pattern', function (req, res) {
 		}
 	}
 	console.log("/pattern");
-	res.render("pattern", {});
+	res.render("pattern", {pattern: states.pattern});
 });
 
 module.exports = router;
