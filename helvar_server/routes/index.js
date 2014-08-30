@@ -1,71 +1,99 @@
 var express = require('express');
 var router = express.Router();
-var directlevel = require("./directlevel");
-
-// init directlevel library
-directlevel.init(settings.router_address);
-// all of lights to default color
-for (var i =0; i< 8; i++) {
-	directlevel.rgb(i+1, settings.default_color);
-}
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.sendFile('main_console.html', {root:"./public/"});
-    console.log("/console");
+	res.sendFile('main_console.html', {root:"./public/"});
+	console.log("/console");
 });
 
 // process XML message from NEXUS
 router.post('/', function(req, res) {
-    var ipaddr = req.client.remoteAddress;
-    var MACaddr	= req.body.lvdata['$']['MACaddr'];
-    var ID = Number(req.body.lvdata.lightid);
-    states.IPDICT[ipaddr] = MACaddr;
+	var ipaddr = req.client.remoteAddress;
+	var MACaddr	= req.body.lvdata['$']['MACaddr'];
+	var ID = Number(req.body.lvdata.lightid);
+	states.IPDICT[ipaddr] = MACaddr;
+	var pulse = Number(req.body.lvdata.vitalpulse);
+	var abnormalp = (pulse == 0);
 
-    if (isNaN(ID)) {
-	res.send("NOID");
-	return ;
-    }
-    console.log(MACaddr+ ":"+ ID);
+	if (isNaN(ID)) {
+		res.send("NOID");
+		return ;
+	}
+	console.log(MACaddr+ ":"+ ID);
 
-    ID = ((ID-1)%8)+1;
+	ID = ((ID-1)%8)+1;
 
-    // register IP - MAC assoc
-    // update?
-    var termno = settings.MACDICT[MACaddr];
+	// register IP - MAC assoc
+	// update?
 
-    if (states.selected[termno] != ID) {
-	// update!
+	var termno = settings.MACDICT[MACaddr];
+
 	var prev = states.selected[termno];
-	directlevel.rgb(prev, settings.default_color, 100);
-	directlevel.rgb(ID, states.colors[termno], 100);
-	states.selected[termno] = ID;
-    }
+	if (states.alerts[ID-1]<0) {
+		// pre-alert state. if abnormal repeated
+		// 10-times, system goes to emergency-state.
+		if (abnormalp) {
+			states.alerts[ID-1]--;
+			if (states.alerts[ID-1] <= -10) {
+				states.alerts[ID-1] = 10;
+			}
+		} else {
+			states.alerts[ID-1]++;
+		}
+	} else if (states.alerts[ID-1]>0) {
+		// ergency-state. if abnormal happens it reset
+		// counter. if normal repeated 10-times, 
+		// system will calm down.
+		if (abnormalp) {
+			states.alerts[ID-1] = 10;
+		} else {
+			states.alerts[ID-1]--;
+		}
+	} else if (abnormalp) {
+		// normal state. and some abnormal detected,
+		// system goes to pre-alert-state.
+		states.alerts[ID-1]--;
+	}
 
-    res.send("OK");
+	if (prev != ID) {
+		// update!
+		if (states.alerts[prev-1] > 0) {
+			// in alerts situation, it will be carries 
+			// to new location ... hehehe
+			states.alerts[ID-1]   = states.alerts[prev-1];
+			states.alerts[prev-1] = 0;
+		} else {
+			directlevel.rgb(prev, settings.default_color, 100);
+			directlevel.rgb(ID, states.colors[termno], 100);
+			states.selected[termno] = ID;
+		}
+	}
+
+	res.send("OK");
 });
 
 // for initial colorvalue 
 router.get('/colors', function(req, res) {
-    res.send(settings.ecoselector_colors);
-    console.log("colors fetched");
+	res.send(settings.ecoselector_colors);
+	console.log("colors fetched");
 });
 
 // color update request from NEXUS
 router.post('/updatecolor', function(req, res) {
-    console.log("/updater");
-    console.log(req.body.color);
-    var MACaddr = states.IPDICT[req.client.remoteAddress];
-    var termno = settings.MACDICT[MACaddr];
+	console.log("/updater");
+	console.log(req.body.color);
+	var MACaddr = states.IPDICT[req.client.remoteAddress];
+	var termno = settings.MACDICT[MACaddr];
 	if (termno == undefined) {
 		res.send("NO assign");
 		return ;
 	}
-    states.colors[termno] = req.body.color;
-    directlevel.rgb(states.selected[termno], req.body.color);
-    console.log("--" + states.colors + "," + req.client.remoteAddress);
-    console.log(states.IPDICT);
-    res.send("OK");
+	states.colors[termno] = req.body.color;
+	directlevel.rgb(states.selected[termno], req.body.color);
+	console.log("--" + states.colors + "," + req.client.remoteAddress);
+	console.log(states.IPDICT);
+	res.send("OK");
 });
 
 // scene changer
@@ -93,25 +121,17 @@ router.get('/scene', function (req, res) {
 // pattern changer
 router.get('/pattern', function (req, res) {
 	if (req.query != undefined) {
-		var sceneno= Number(req.query.no);
-		if (sceneno == -1) {
-		} else if (1 <= sceneno && sceneno <= 16) {
-			var ctable = settings.scene_colors["scene" +sceneno];
-			for (var i = 0; i< ctable.length; i++) {
-				directlevel.rgb(i+1, ctable[i],100);
-			}
-			console.log("scene changed ... in scene mode");
+		var patno= Number(req.query.no);
+		if (!isNaN(patno)) {
+			states.pattern = patno;
+			console.log("pattern changed ... in pattern mode");
 		} else {
-			for (var i = 0; i< 8; i++) {
-				directlevel.rgb(i+1, settings.default_color,100);
-			}
-			console.log("deactivate scene mode");
+			states.pattern = 0;
+			console.log("deactivate pattern mode");
 		}
 	}
-	console.log("/scene");
-	console.log("hoo" + settings.scene_colors.toString());
-	res.render("scene", { scene: sceneno, colors:settings.scene_colors.toString()});
+	console.log("/pattern");
+	res.render("pattern", {});
 });
-
 
 module.exports = router;

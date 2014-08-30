@@ -4,6 +4,9 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var xmlBodyParser= require('./multipart-xml-bodyparser');
 
+// timer handler
+var timerhandler = require("./timerhandler");
+
 // global settings
 settings = require("./readsettings");
 
@@ -15,12 +18,21 @@ var app = express();
 states = {}
 states.IPDICT = {};  // IP addr -> MAC translate cache
 states.selected = []; // termNo -> current location ID
+states.pattern = 0;
+
+// init directlevel library
+directlevel = require("./directlevel");
+directlevel.init(settings.router_address);
 
 states.alerts = []; // alert information
 states.colors = []; // termNo -> current color setting
 for (var i =0; i< 8; i++) { // initialize above 2
-	states.alerts.push(false);
+	// all alert flag to normal
+	states.alerts.push(0);
+
+	// all of lights to default color
 	states.colors.push(settings.ecoselector_colors[0]);
+	directlevel.rgb(i+1, settings.default_color);
 }
 
 
@@ -67,5 +79,8 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+// TimerON
+setInterval(timerhandler, 1000);
 
 module.exports = app;
