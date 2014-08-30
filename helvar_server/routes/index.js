@@ -36,19 +36,23 @@ router.post('/', function(req, res) {
 
     if (states.selected[termno] != ID) {
 		var i;
-		var prevflag = false;
+		var prevflag = true;
 		var prev = states.selected[termno];
 		for (i = 0; i< 8; i++) {
 			if (termno != i) {
-			    if( states.selected[i] == prev) {
+			    if( prev != 0 && states.selected[i] == prev) {
 					directlevel.rgb(states.selected[i], states.colors[i],100);
-					prevflag = true;
-				} else if (states.selected[i] == ID) {break;}
+					states.contentionflag[states.selected[i]-1] = false;
+					prevflag = false;
+				} else if (states.selected[i] == ID) {
+					states.contentionflag[states.selected[i]-1] = true;
+					break;
+				}
 			}
 		}
 
 		// update!
-		if (prevflag == false) {
+		if (prevflag && prev != 0) {
 			directlevel.rgb(prev, settings.default_color, 100);
 		}
 		if (i == 8) {
@@ -58,6 +62,7 @@ router.post('/', function(req, res) {
 		}
 		states.selected[termno] = ID;
 	}
+	console.log(states.contentionflag);
 
     res.send("OK");
 });
@@ -79,7 +84,9 @@ router.post('/updatecolor', function(req, res) {
 		return ;
 	}
     states.colors[termno] = req.body.color;
-    directlevel.rgb(states.selected[termno], req.body.color);
+	if (!states.contentionflag[states.selected[termno]-1]) {
+		directlevel.rgb(states.selected[termno], req.body.color);
+	}
     console.log("--" + states.colors + "," + req.client.remoteAddress);
     console.log(states.IPDICT);
     res.send("OK");

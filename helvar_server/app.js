@@ -18,12 +18,14 @@ states.selected = []; // termNo -> current location ID
 
 states.alerts = []; // alert information
 states.colors = []; // termNo -> current color setting
-for (var i =0; i< 8; i++) { // initialize above 3
+states.contentionflag = []; // contention
+
+for (var i =0; i< 8; i++) { // initialize above 4
 	states.selected.push(0);
 	states.alerts.push(false);
 	states.colors.push(settings.ecoselector_colors[0]);
+	states.contentionflag.push(false);
 }
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
