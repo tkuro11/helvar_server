@@ -22,7 +22,7 @@ router.post('/', function(req, res) {
 	}
 	console.log(MACaddr+ ":"+ ID);
 
-	ID = ((ID-1)%8)+1;
+    ID = ((ID-1)%8)+1;
 
 	// register IP - MAC assoc
 	// update?
