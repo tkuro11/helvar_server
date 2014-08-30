@@ -5,6 +5,7 @@ function raw(addr, value, fade) {
     if (fade == undefined) {
         fade = 10;
     }
+	value = Math.floor(value);
     fade += dummy_diff;
     dummy_diff = (dummy_diff +1) &0xf;
     var cmd = ">V:1,C:14,F:"+fade+",L:"+value+",@1.1.1."+addr +"#";
