@@ -18,7 +18,8 @@ states.selected = []; // termNo -> current location ID
 
 states.alerts = []; // alert information
 states.colors = []; // termNo -> current color setting
-for (var i =0; i< 8; i++) { // initialize above 2
+for (var i =0; i< 8; i++) { // initialize above 3
+	states.selected.push(0);
 	states.alerts.push(false);
 	states.colors.push(settings.ecoselector_colors[0]);
 }

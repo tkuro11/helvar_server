@@ -35,12 +35,22 @@ router.post('/', function(req, res) {
     var termno = settings.MACDICT[MACaddr];
 
     if (states.selected[termno] != ID) {
-	// update!
-	var prev = states.selected[termno];
-	directlevel.rgb(prev, settings.default_color, 100);
-	directlevel.rgb(ID, states.colors[termno], 100);
-	states.selected[termno] = ID;
-    }
+		var i;
+		for (i = 0; i< 8; i++) {
+			if (termno != i && states.selected[i] == ID) {break;}
+		}
+		
+		if (i == 8) {
+			// update!
+			var prev = states.selected[termno];
+			directlevel.rgb(prev, settings.default_color, 100);
+			directlevel.rgb(ID, states.colors[termno], 100);
+			states.selected[termno] = ID;
+		} else {
+			directlevel.rgb(ID, settings.default_color, 100);
+			states.selected[termno] = ID;
+		}
+	}
 
     res.send("OK");
 });
