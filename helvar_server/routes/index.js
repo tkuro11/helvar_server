@@ -86,7 +86,8 @@ router.get('/scene', function (req, res) {
 		}
 	}
 	console.log("/scene");
-	res.render("scene", { scene: sceneno});
+	res.render("scene", { scene: sceneno, 
+		colors: JSON.stringify(settings.scene_colors)});
 });
 
 // pattern changer
@@ -108,7 +109,8 @@ router.get('/pattern', function (req, res) {
 		}
 	}
 	console.log("/scene");
-	res.render("scene", { scene: sceneno});
+	console.log("hoo" + settings.scene_colors.toString());
+	res.render("scene", { scene: sceneno, colors:settings.scene_colors.toString()});
 });
 
 
