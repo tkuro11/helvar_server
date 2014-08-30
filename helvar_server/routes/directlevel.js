@@ -24,9 +24,6 @@ function rgb(lightno, rgb, fade) {
         g = rgb[1];
         b = rgb[2];
     }
-    console.log(r);
-    console.log(g);
-    console.log(b);
     var addr = (lightno-1)*3;
     raw(addr+1, r, fade);
     raw(addr+2, g, fade);
