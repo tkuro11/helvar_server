@@ -43,6 +43,7 @@ jQuery(function($) {
         $.post("updatecolor",
                 {"color":cw.color().hex},
                 function(data) {
+					au.play();
                 });
     });
 });
@@ -58,9 +59,9 @@ function hlchange(diff) {
 }
 function push(target, dir) {
     hlchange(dir);
-    $(target).css("background", "#93f");
+    $(target).css("box-shadow", "1px 10px 10px rgba(100,40,0,0.8) inset");
     setTimeout(function() {
-        $(target).css("background", "none");
+        $(target).css("box-shadow", "2px 2px 2px rgba(0,0,0,0.8)");
     }, 200);
     $.post("updatecolor",
             {"color":colors[selected-1]},
@@ -74,13 +75,13 @@ function push(target, dir) {
         <div class="header">Light Control System</div>
         <div class="barbtn_group">
 			<div class="inner">ECO selector</div>
-            <div class="switch" onclick="push(this,-1)"> <br><br><br>  &lt;<br><br><br><br><br> </div>
+            <div class="switch hot" onclick="push(this,-1)"></div>
             <div class="barbtn selected" id="bar1"></div>
             <div class="barbtn" id="bar2"></div>
             <div class="barbtn" id="bar3"></div> <div class="barbtn" id="bar4"></div>
             <div class="barbtn" id="bar5"></div> <div class="barbtn" id="bar6"></div>
             <div class="barbtn" id="bar7"></div> <div class="barbtn" id="bar8"></div>
-            <div class="switch" onclick="push(this,1)"><br><br><br> &gt;<br><br><br><br><br></div>
+            <div class="switch cool" onclick="push(this,1)"></div>
             <div class="inner left">&lt;-hot</div> <div class="inner right">cool-&gt;</div>
         <hr>
 		<br>
