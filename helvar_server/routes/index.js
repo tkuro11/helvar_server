@@ -68,12 +68,48 @@ router.post('/updatecolor', function(req, res) {
     res.send("OK");
 });
 
+// scene changer
 router.get('/scene', function (req, res) {
+	if (req.query != undefined) {
+		var sceneno= Number(req.query.no);
+		if (1 <= sceneno && sceneno <= 16) {
+			var ctable = settings.scene_colors["scene" +sceneno];
+			for (var i = 0; i< ctable.length; i++) {
+				directlevel.rgb(i+1, ctable[i],100);
+			}
+			console.log("scene changed ... in scene mode");
+		} else {
+			console.log("deactivate scene mode");
+			for (var i = 0; i< 8; i++) {
+				directlevel.rgb(i+1, settings.default_color,100);
+			}
+		}
+	}
 	console.log("/scene");
+	res.render("scene", { scene: sceneno});
 });
 
-router.get('/scene', function (req, res) {
+// pattern changer
+router.get('/pattern', function (req, res) {
+	if (req.query != undefined) {
+		var sceneno= Number(req.query.no);
+		if (sceneno == -1) {
+		} else if (1 <= sceneno && sceneno <= 16) {
+			var ctable = settings.scene_colors["scene" +sceneno];
+			for (var i = 0; i< ctable.length; i++) {
+				directlevel.rgb(i+1, ctable[i],100);
+			}
+			console.log("scene changed ... in scene mode");
+		} else {
+			for (var i = 0; i< 8; i++) {
+				directlevel.rgb(i+1, settings.default_color,100);
+			}
+			console.log("deactivate scene mode");
+		}
+	}
 	console.log("/scene");
+	res.render("scene", { scene: sceneno});
 });
+
 
 module.exports = router;

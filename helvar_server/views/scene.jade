@@ -1,0 +1,31 @@
+extends layout
+mixin btn(no)
+  div
+    a.btn(id="marker#{no}", href="scene?no=#{no}") #{no}
+
+block content
+  h1 scene selector
+
+  +btn(1)
+  +btn(2)
+  +btn(3)
+  +btn(4)
+  +btn(5)
+  +btn(6)
+  +btn(7)
+  +btn(8)
+  +btn(9)
+  +btn(10)
+  +btn(11)
+  +btn(12)
+  +btn(13)
+  +btn(14)
+  +btn(15)
+  +btn(16)
+  hr
+  +btn("SCENE OFF")
+
+  script(type="text/javascript").
+    var t = document.getElementById("marker#{scene}");
+    t.innerText = "→ "+t.innerText + " ←";
+
