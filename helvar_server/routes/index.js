@@ -41,7 +41,7 @@ router.post('/', function(req, res) {
 		for (i = 0; i< 8; i++) {
 			if (termno != i) {
 			    if( states.selected[i] == prev) {
-					directlevel.rgb(states.selected[i], states.colors[i]);
+					directlevel.rgb(states.selected[i], states.colors[i],100);
 					prevflag = true;
 				} else if (states.selected[i] == ID) {break;}
 			}
