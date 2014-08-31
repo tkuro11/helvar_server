@@ -39,8 +39,6 @@ for (var i =0; i< 8; i++) { // initialize above 4
 
 	directlevel.rgb(i+1, settings.default_color);
 }
-states.colors[3] = "#f000f0";
-states.selected[3] = 4;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
