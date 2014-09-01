@@ -85,6 +85,6 @@ app.use(function(err, req, res, next) {
 });
 
 // TimerON
-setInterval(timerhandler, 1000);
+setInterval(timerhandler, 500);
 
 module.exports = app;

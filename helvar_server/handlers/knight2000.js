@@ -7,8 +7,9 @@ var knight2000 = {
 				  } else {
 					  c /= 2;
 				  }
-				  directlevel.rgb(i  , [c,0,0],50);
-				  directlevel.rgb(i+4, [c,0,0],50);
+				  directlevel.raw(i*3-2, c,20);
+				  directlevel.raw(i*3-2+12, c,20);
+		//		  directlevel.rgb(i+4, [c,0,0],20);
 				  this.colors[i-1] = c;
 			  }
 			  this.idx += this.dir;

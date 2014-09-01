@@ -1,7 +1,8 @@
 // load handlers
 var knight2000 = require('./handlers/knight2000');
-var juliana = require('./handlers/juliana.js');
-var normal = require('./handlers/normal.js');
+var juliana = require('./handlers/juliana');
+var normal = require('./handlers/normal');
+var vital = require('./handlers/vital');
 
 
 // state
@@ -16,6 +17,9 @@ var timerhandler = function () {
 			break;
 		case 2: // juliana
 			cur = juliana;
+			break;
+		case 3: // vital
+			cur = vital;
 			break;
 		default: // emergency
 			cur = normal;
