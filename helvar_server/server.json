@@ -1,5 +1,5 @@
 {
-    "default_color": "#f0f0f0"
+    "default_color": "#b0b0b0"
 ,   "router_address": "10.254.1.1"
 ,	"ecoselector_colors": [
 		"#f03030",
@@ -16,7 +16,7 @@
 		"f8:a9:d0:4f:00:73": 1,
 		"f8:a9:d0:4e:fe:b2": 2,
 		"f8:a9:d0:4e:fb:b4": 3,
-		"f8:a9:d0:4e:01:17": 4,
+		"f8:a9:d0:4f:01:17": 4,
 		"dummy3": 5,
 		"dummy4": 6,
 		"dummy5": 7

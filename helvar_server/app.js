@@ -19,6 +19,7 @@ states = {}
 states.IPDICT = {};  // IP addr -> MAC translate cache
 states.selected = []; // termNo -> current location ID
 states.pattern = 0;
+states.scene_flag = false;
 
 // init directlevel library
 directlevel = require("./directlevel");

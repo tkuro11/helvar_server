@@ -3,6 +3,7 @@ var knight2000 = require('./handlers/knight2000');
 var juliana = require('./handlers/juliana');
 var normal = require('./handlers/normal');
 var vital = require('./handlers/vital');
+var circle = require('./handlers/circle');
 
 
 // state
@@ -20,6 +21,9 @@ var timerhandler = function () {
 			break;
 		case 3: // vital
 			cur = vital;
+			break;
+		case 4: // circle
+			cur = circle;
 			break;
 		default: // emergency
 			cur = normal;

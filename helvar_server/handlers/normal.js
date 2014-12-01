@@ -3,7 +3,7 @@ var normal = {
 	next: function() {
 			  for (var pos =0; pos< 8; pos++) {
 				  if (states.alerts[pos] > 0) {
-					  directlevel.rgb(pos+1, this.toggle_color[this.idx], 100);
+					  //directlevel.rgb(pos+1, this.toggle_color[this.idx], 100);
 					  this.idx = 1-this.idx;
 					  states.alerts[pos]--;
 					  if (states.alerts[pos] == 0) {
@@ -12,7 +12,7 @@ var normal = {
 						  } else {*/
 							  for (var i = 0; i< 8; i++) {
 								  if (states.selected[i] == pos+1 ) {
-									  directlevel.rgb(pos+1, states.colors[i], 100);
+									  //directlevel.rgb(pos+1, states.colors[i], 100);
 									  break;
 								  }
 							  }
