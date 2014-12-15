@@ -163,7 +163,7 @@ router.get('/pattern', function (req, res) {
 		}
 	}
 	console.log("/pattern");
-	res.render("pattern", {pattern: states.pattern});
+	res.render("pattern", {pattern: states.pattern, handlers: states.handlers});
 });
 
 module.exports = router;

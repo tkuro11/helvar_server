@@ -4,8 +4,9 @@ mixin btn(no, name)
     a.btn(id="marker#{no}", href="pattern?no=#{no}") #{no}.#{name}
 block content
   h1 pattern changer
-  +btn(1, "K2000")
-  +btn(2, "Juliana")
+  - for (var i = 1; i< handlers.length; i++) {
+    +btn(i, handlers[i][0])
+  - }
   br(clear="all")
   hr
   +btn(0, "NO PAT")
