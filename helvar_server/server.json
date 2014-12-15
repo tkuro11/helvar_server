@@ -1,6 +1,6 @@
 {
-	"default_color": "#f0f0f0"
-,   "router_address": "localhost"
+    "default_color": "#b0b0b0"
+,   "router_address": "10.254.1.1"
 ,	"ecoselector_colors": [
 		"#f03030",
 		"#f04050",
@@ -14,21 +14,21 @@
 ,   "MACDICT": {
 		"f8:a9:d0:4e:fd:d7": 0,
 		"f8:a9:d0:4f:00:73": 1,
-		"10:aa:bb:ff:85:dd": 2,
-		"dummy1": 3,
-		"dummy2": 4,
+		"f8:a9:d0:4e:fe:b2": 2,
+		"f8:a9:d0:4e:fb:b4": 3,
+		"f8:a9:d0:4f:01:17": 4,
 		"dummy3": 5,
 		"dummy4": 6,
 		"dummy5": 7
     }
 ,	"scene_colors": {
 		"scene1": [
-			"#1040ff", "#0e38ee", "#0c30dd", "#0a28cc", 
-			"#2040ff", "#1e38ee", "#1c30dd", "#1a28cc" 
+			"#808080", "#808080", "#808080", "#808080",
+			"#808080", "#808080", "#808080", "#808080"
 		]
 ,		"scene2": [
-			"#2040ff", "#1e38ee", "#1c30dd", "#1a28cc",
-			"#1040ff", "#0e38ee", "#0c30dd", "#0a28cc" 
+			"#000000", "#000000", "#000000", "#000000",  
+			"#000000", "#000000", "#000000", "#000000"
 		]
 ,		"scene3": [
 			"#ff4010", "#ee380e", "#dd300c", "#cc280a",
@@ -39,40 +39,40 @@
 			"#ff4010", "#ee380e", "#dd300c", "#cc280a" 
 		]
 ,		"scene5": [
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+			"#2040ff", "#1e38ee", "#1c30dd", "#1a28cc",
+			"#1040ff", "#0e38ee", "#0c30dd", "#0a28cc" 
 		]
 ,		"scene6": [
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+			"#ffb0b0", "#ffb0b0", "#b0b0ff", "#b0b0ff", 
+			"#ffb0b0", "#ffb0b0", "#b0b0ff", "#b0b0ff"
 		]
 ,		"scene7": [
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+			"#a47baf", "#78bbba", "#02300f", "#9999ff", 
+			"#ffffff", "#f34f90", "#00ffff", "#f0000f"
 		]
 ,		"scene8": [
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+			"#00ff00", "#00ff00", "#00ff00", "#00ff00", 
+			"#00ff00", "#00ff00", "#00ff00", "#00ff00"
 		]
 ,		"scene9": [
 			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
 			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
 		]
 ,		"scene10": [
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+			"#0000ff", "#0000ff", "#0000ff", "#0000ff", 
+			"#0000ff", "#0000ff", "#0000ff", "#0000ff" 
 		]
 ,		"scene11": [
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+			"#ff0000", "#ff0000", "#ff0000", "#ff0000", 
+			"#ff0000", "#ff0000", "#ff0000", "#ff0000"
 		]
 ,		"scene12": [
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+			"#ff0000", "#ff0000", "#0000ff", "#0000ff", 
+			"#ff0000", "#ff0000", "#0000ff", "#0000ff"
 		]
 ,		"scene13": [
 			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 
-			"#ffffff", "#ffffff", "#ffffff", "#ffffff"
+			"#ffffff", "#ff0000", "#ffffff", "#ffffff"
 		]
 ,		"scene14": [
 			"#ffffff", "#ffffff", "#ffffff", "#ffffff", 

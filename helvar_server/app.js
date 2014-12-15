@@ -23,6 +23,7 @@ states = {}
 states.IPDICT = {};  // IP addr -> MAC translate cache
 states.selected = []; // termNo -> current location ID
 states.pattern = 0; // default = normal
+states.scene_flag = false;
 
 // init directlevel library
 directlevel = require("./directlevel");
@@ -89,6 +90,6 @@ app.use(function(err, req, res, next) {
 });
 
 // TimerON
-setInterval(timerhandler, 1000);
+setInterval(timerhandler, 500);
 
 module.exports = app;

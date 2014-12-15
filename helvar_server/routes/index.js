@@ -46,6 +46,7 @@ router.post('/', function(req, res) {
 			}
 		}
 
+		console.log("prev::" + prevflag);
 		// update!
 		if (prevflag && prev != 0) {
 			directlevel.rgb(prev, settings.default_color, 100);
@@ -138,8 +139,10 @@ router.get('/scene', function (req, res) {
 				directlevel.rgb(i+1, ctable[i],100);
 			}
 			console.log("scene changed ... in scene mode");
+			states.scene_flag = true;
 		} else {
 			console.log("deactivate scene mode");
+			states.scene_flag = false;
 			for (var i = 0; i< 8; i++) {
 				directlevel.rgb(i+1, settings.default_color,100);
 			}
