@@ -3,22 +3,26 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var xmlBodyParser= require('./multipart-xml-bodyparser');
+var fs = require('fs');
 
 // timer handler
 var timerhandler = require("./timerhandler");
-
-// global settings
-settings = require("./readsettings");
 
 // routes information & express object
 var routes = require('./routes/index');
 var app = express();
 
+// global settings
+settings = require("./readsettings");
+fs.watch("server.json", function (evt, name) {
+	process.exit(0);
+})
+
 // local state informations
 states = {}
 states.IPDICT = {};  // IP addr -> MAC translate cache
 states.selected = []; // termNo -> current location ID
-states.pattern = 0;
+states.pattern = 0; // default = normal
 
 // init directlevel library
 directlevel = require("./directlevel");
