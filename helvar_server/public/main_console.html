@@ -29,7 +29,7 @@ jQuery(function($) {
             colors = data.toString().split(",");
             for (var i = 0; i< colors.length; i++) {
                 var d = darken(colors[i]);
-                $("#bar"+i).css("background", 
+                $("#bar"+(i+1)).css("background", 
                    "-webkit-gradient(linear, left top, right bottom, from("+
                     colors[i] + "), to(" + d + "))");
             }
